@@ -41,15 +41,15 @@ b'wc: testinputs/notARealFile.txt: No such file or directory\n'
 
 - as input
 >>> subprocess.check_output('python3 wc.py -', shell=True)
-b'We don\xe2\x80\x99t handle that situation yet!\n'
+b"We don't handle that situation yet!\n"
 
 -- as input
 >>> subprocess.check_output('python3 wc.py --', shell=True)
-b'We don\xe2\x80\x99t handle that situation yet!\n'
+b"We don't handle that situation yet!\n"
 
 Valid but not currently supported flag
 >>> subprocess.check_output('python3 wc.py -c', shell=True)
-b'We don\xe2\x80\x99t handle that situation yet!\n'
+b"We don't handle that situation yet!\n"
 
 --asd as input
 >>> subprocess.check_output('python3 wc.py -asd', shell=True)
@@ -58,6 +58,22 @@ b"wc: invalid option -- a'\nTry 'python3 wc --help' for more information.\n"
 -asd as input
 >>> subprocess.check_output('python3 wc.py --asd', shell=True)
 b"wc: unrecognised option '--asd'\nTry 'python3 wc --help' for more information.\n"
+
+directory as test no ending /
+>>> subprocess.check_output('python3 wc.py testinputs/directoryTest', shell=True)
+b'wc: testinputs/directoryTest: Is a directory\n0\t0\t0\ttestinputs/directoryTest\n'
+
+directory as test with ending /
+>>> subprocess.check_output('python3 wc.py testinputs/directoryTest/', shell=True)
+b'wc: testinputs/directoryTest/: Is a directory\n0\t0\t0\ttestinputs/directoryTest/\n'
+
+Test with a pdf
+>>> subprocess.check_output('python3 wc.py testinputs/pdfTestMultipleLines.pdf', shell=True)
+b'183\t641\t18548\ttestinputs/pdfTestMultipleLines.pdf\n'
+
+Test with a jpeg
+>>> subprocess.check_output('python3 wc.py testinputs/jpgTest.jpg', shell=True)
+b'4813\t26088\t1238933\ttestinputs/jpgTest.jpg\n'
 """
 
 if __name__ == "__main__":
