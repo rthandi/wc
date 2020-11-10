@@ -1,79 +1,7 @@
-import sys
-
-def outputBuilder(lines, words, chars, lPresent, wPresent, cPresent, fileName):
-    outputString = "\t"
-    if not lPresent and not wPresent and not cPresent:
-        outputString += lines + "\t" + words + "\t" + chars + "\t"
-    else:
-        if lPresent:
-            outputString += lines + "\t"
-        if wPresent:
-            outputString += words + "\t"
-        if cPresent:
-            outputString += chars + "\t"
-    print(outputString + fileName)
-
-argv =  sys.argv
-argLength = len(argv)
-# Process arguments
-lPresent = False
-wPresent = False
-cPresent = False
-fileInputs = []
-validInputs = ["--bytes", "-m", "--chars", "--lines" "-L" "--max-line-length", "--words", "--help", "--version", "--"]
-
-for i in range(1, argLength):
-    currentArg = argv[i]
-    if currentArg in validInputs or currentArg[0:13] == "--files0-from":
-        print("We don't handle that situation yet!")
-        sys.exit()
-    elif currentArg[0] == '-':
-        for j in range(1, len(currentArg)):
-            currentChar = currentArg[j]
-            if currentChar == 'l':
-                lPresent = True
-            elif currentChar == 'w':
-                wPresent = True
-            elif currentChar == 'c':
-                cPresent = True
-            else:
-                print("wc: invalid option -- '" + currentChar + "'")
-                print("Try 'python3 wc --help' for more information.")
-                sys.exit()
-    else:
-        fileInputs.append(currentArg)
-
-#Init totals
-totalL = 0
-totalW = 0
-totalC = 0
-
-if len(fileInputs) > 0:
-    for i in range(0, len(fileInputs)):
-        userInput = fileInputs[i]
-        if userInput[0:2] == "--":
-            if userInput == "--":
-                # This would usually allow stdin input until ctrl-d is pressed when it will execute with that input
-                print("We don't handle that situation yet!")
-            else:
-                # As per the error from wc
-                print("wc: unrecognised option '" + userInput + "'\nTry 'python3 wc --help' for more information.")
-        elif userInput[0] == "-":
-            if userInput == "-":
-                # This would usually allow stdin until ctrl-d is pressed when it will execute with that input
-                print("We don't handle that situation yet!")
-            else:
-                # As per the error from wc
-                print("wc: invalid option -- " + userInput[1] + "'\nTry 'python3 wc --help' for more information.")
-        else:
-            try:
-                file = open(userInput, mode='r+b')
-                fileRead = file.read()
-                charCount = len(fileRead)
-                wordCount = len(fileRead.split(' '.encode()))
-
-! " # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; < = > ? @ A B C D E F G H I J K L M
-N O P Q R S T U V W X Y Z [ \ ] ^ _ ` a b c d e f g h i j k l m n o p q r s t u v w x y z { | } ~ 
+	 
+   
+   ! " # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; < = > ? @ A B C D E F G H I J K L M
+N O P Q R S T U V W X Y Z [ \ ] ^ _ ` a b c d e f g h i j k l m n o p q r s t u v w x y z { | } ~   
 ¡ ¢ £ ¤ ¥ ¦ § ¨ © ª « ¬ ­ ® ¯ ° ± ² ³ ´ µ ¶ · ¸ ¹ º » ¼ ½ ¾ ¿ À Á Â Ã Ä Å Æ Ç È É Ê Ë Ì Í Î Ï Ð Ñ Ò Ó
 Ô Õ Ö × Ø Ù Ú Û Ü Ý Þ ß à á â ã ä å æ ç è é ê ë ì í î ï ð ñ ò ó ô õ ö ÷ ø ù ú û ü ý þ ÿ Ā ā Ă ă Ą ą Ć
 ć Ĉ ĉ Ċ ċ Č č Ď ď Đ đ Ē ē Ĕ ĕ Ė ė Ę ę Ě ě Ĝ ĝ Ğ ğ Ġ ġ Ģ ģ Ĥ ĥ Ħ ħ Ĩ ĩ Ī ī Ĭ ĭ Į į İ ı Ĳ ĳ Ĵ ĵ Ķ ķ ĸ Ĺ
@@ -1592,4 +1520,4 @@ N O P Q R S T U V W X Y Z [ \ ] ^ _ ` a b c d e f g h i j k l m n o p q r s t u 
 𤈀 𤈁 𤈂 𤈃 𤈄 𤈅 𤈆 𤈇 𤈈 𤈉 𤈊 𤈋 𤈌 𤈍 𤈎 𤈏 𤈐 𤈑 𤈒 𤈓 𤈔 𤈕 𤈖 𤈗 𤈘 𤈙 𤈚 𤈛 𤈜 𤈝 𤈞 𤈟 𤈠 𤈡 𤈢 𤈣 𤈤 𤈥 𤈦 𤈧 𤈨 𤈩 𤈪 𤈫 𤈬 𤈭 𤈮 𤈯 𤈰 𤈱 𤈲
 𤈳 𤈴 𤈵 𤈶 𤈷 𤈸 𤈹 𤈺 𤈻 𤈼 𤈽 𤈾 𤈿 𤉀 𤉁 𤉂 𤉃 𤉄 𤉅 𤉆 𤉇 𤉈 𤉉 𤉊 𤉋 𤉌 𤉍 𤉎 𤉏 𤉐 𤉑 𤉒 𤉓 𤉔 𤉕 𤉖 𤉗 𤉘 𤉙 𤉚 𤉛 𤉜 𤉝 𤉞 𤉟 𤉠 𤉡 𤉢 𤉣 𤉤 𤉥
 𤉦 𤉧 𤉨 𤉩 𤉪 𤉫 𤉬 𤉭 𤉮 𤉯 𤉰 𤉱 𤉲 𤉳 𤉴 𤉵 𤉶 𤉷 𤉸 𤉹 𤉺 𤉻 𤉼 𤉽 𤉾 𤉿 𤊀 𤊁 𤊂 𤊃 𤊄 𤊅 𤊆 𤊇 𤊈 𤊉 𤊊 𤊋 𤊌 𤊍 𤊎 𤊏 𤊐 𤊑 𤊒 𤊓 𤊔 𤊕 𤊖 𤊗 𤊘
-𤊙 𤊚 𤊛 𤊜
+𤊙 𤊚 𤊛 𤊜 
