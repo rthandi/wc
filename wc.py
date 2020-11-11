@@ -20,7 +20,7 @@ lPresent = False
 wPresent = False
 cPresent = False
 fileInputs = []
-validInputs = ["--bytes", "-m", "--chars", "--lines" "-L" "--max-line-length", "--words", "--help", "--version", "--"]
+validInputs = ["--bytes", "-m", "--chars", "--lines", "-L", "--max-line-length", "--words", "--help", "--version", "--"]
 
 for i in range(1, argLength):
     currentArg = argv[i]
