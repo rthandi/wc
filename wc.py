@@ -1,4 +1,5 @@
 import sys
+import argparse
 
 def outputBuilder(lines, words, chars, lPresent, wPresent, cPresent, fileName):
     outputString = "\t"
@@ -13,35 +14,60 @@ def outputBuilder(lines, words, chars, lPresent, wPresent, cPresent, fileName):
             outputString += chars + "\t"
     print(outputString + fileName)
 
-argv =  sys.argv
-argLength = len(argv)
-# Process arguments
-lPresent = False
-wPresent = False
-cPresent = False
-fileInputs = []
-validInputs = ["--bytes", "-m", "--chars", "--lines", "-L", "--max-line-length", "--words", "--help", "--version", "--"]
+def processInput():
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("filename", type=str, action="append", nargs='*')
+    parser.add_argument("-l", action="store_true")
+    parser.add_argument("-w", action="store_true")
+    parser.add_argument("-c", action="store_true")
+    return parser.parse_known_intermixed_args()
 
-for i in range(1, argLength):
-    currentArg = argv[i]
-    if currentArg in validInputs or currentArg[0:13] == "--files0-from":
-        print("We don't handle that situation yet!")
-        sys.exit()
-    elif currentArg[0] == '-':
-        for j in range(1, len(currentArg)):
-            currentChar = currentArg[j]
-            if currentChar == 'l':
-                lPresent = True
-            elif currentChar == 'w':
-                wPresent = True
-            elif currentChar == 'c':
-                cPresent = True
-            else:
-                print("wc: invalid option -- '" + currentChar + "'")
-                print("Try 'python3 wc --help' for more information.")
-                sys.exit()
-    else:
-        fileInputs.append(currentArg)
+#"--bytes", "-m", "--chars", "--lines", "-L", "--max-line-length", "--words", "--help", "--version", "--"
+# argv =  sys.argv
+
+validInputs = ["--bytes", "-m", "--chars", "--lines", "-L", "--max-line-length", "--words", "--help", "--version", "--"]
+args, knownArgs = processInput()
+print(knownArgs)
+print(args)
+if knownArgs:
+    for i in range(0, len(knownArgs)):
+        currentArg = knownArgs[i]
+        if currentArg in validInputs or currentArg[0:13] == "--files0-from":
+            print("We don't handle that situation yet!")
+            sys.exit()
+        else:
+            print("wc: invalid option -- '" + currentArg[1] + "'")
+            print("Try 'python3 wc --help' for more information.")
+            sys.exit()
+
+# argLength = len(argv)
+# Process arguments
+lPresent = args.l
+wPresent = args.w
+cPresent = args.c
+fileInputs = args.filename
+
+
+# for i in range(1, argLength):
+#     currentArg = argv[i]
+#     if currentArg in validInputs or currentArg[0:13] == "--files0-from":
+#         print("We don't handle that situation yet!")
+#         sys.exit()
+#     elif currentArg[0] == '-':
+#         for j in range(1, len(currentArg)):
+#             currentChar = currentArg[j]
+#             if currentChar == 'l':
+#                 lPresent = True
+#             elif currentChar == 'w':
+#                 wPresent = True
+#             elif currentChar == 'c':
+#                 cPresent = True
+#             else:
+#                 print("wc: invalid option -- '" + currentChar + "'")
+#                 print("Try 'python3 wc --help' for more information.")
+#                 sys.exit()
+#     else:
+#         fileInputs.append(currentArg)
 
 #Init totals
 totalL = 0
