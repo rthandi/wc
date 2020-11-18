@@ -69,10 +69,6 @@ Test with a pdf
 >>> subprocess.check_output('python3 wc.py testinputs/pdfTestMultipleLines.pdf', shell=True)
 b'\t183\t641\t18548\ttestinputs/pdfTestMultipleLines.pdf\n'
 
-Test with a jpeg
->>> subprocess.check_output('python3 wc.py testinputs/jpgTest.jpg', shell=True)
-b'\t4813\t26088\t1238933\ttestinputs/jpgTest.jpg\n'
-
 Test all unicode characters
 >>> subprocess.check_output('python3 wc.py testinputs/unicodeTest.txt', shell=True)
 b'\t1522\t77501\t327679\ttestinputs/unicodeTest.txt\n'
