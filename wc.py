@@ -91,7 +91,8 @@ def notHandled():
     return "not handled"
 
 def run(args, knownArgs):
-    if verifyInputs(knownArgs):
+    verif = verifyInputs(knownArgs)
+    if verif and verif != 'invalid' and verif != 'not handled':
         return processFiles(args)
     else:
         return False
